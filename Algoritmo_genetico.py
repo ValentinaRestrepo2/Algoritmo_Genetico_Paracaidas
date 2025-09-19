@@ -15,8 +15,10 @@ class AlgoritmoGenParacaidas:
         self.exito = False
         self.choque = False
 
-    def simular_caida(self, pasos=100):
+    def simular_caida(self, pasos=1000): # Se aumenta el número de pasos para una simulación más detallada
         delta_t = 1  # Son los segundos por paso
+        posiciones = []
+        
         for _ in range(pasos):
             if self.posicion <= 0:
                 self.posicion = 0
@@ -33,11 +35,13 @@ class AlgoritmoGenParacaidas:
             self.posicion -= self.velocidad * delta_t
             self.tiempo += delta_t
             
-        return self.posicion, self.velocidad, self.tiempo
+            posiciones.append(self.posicion)
+            
+        return self.posicion, self.velocidad, self.tiempo, posiciones
 
     def CalcularAdaptacion(self):
         #Cuanto más cerca esté la velocidad final de 0 es mejor.
-        _, velocidad_final, tiempo = self.simular_caida()
+        _, velocidad_final, tiempo, _ = self.simular_caida()
         # El fitness es inversamente proporcional al valor absoluto de la velocidad final
         fitness = 1 / (abs(velocidad_final) + 0.001)
         return fitness
@@ -68,7 +72,8 @@ def mutacion(individuo, prob_mutacion):
 
 def evolucionar(poblacion, tamano_poblacion, prob_mutacion):
     poblacion_nueva = []
-    mejores = seleccion(poblacion, 2) # 2 o 1
+    num_mejores_a_seleccionar = min(2, len(poblacion))
+    mejores = seleccion(poblacion,num_mejores_a_seleccionar ) # 2 o 1
     poblacion_nueva.extend(mejores)
 
     while len(poblacion_nueva) < tamano_poblacion:
@@ -101,7 +106,7 @@ if __name__ == "__main__":
         # Ver el mejor individuo cada 10 generaciones
         if (generacion + 1) % 10 == 0 or generacion == 0 or generacion == NUM_GENERACIONES - 1:
             mejor_individuo = Get_mejor_individuo(poblacion)
-            _, velocidad_final,tiempo = mejor_individuo.simular_caida()
+            _, velocidad_final,tiempo, _ = mejor_individuo.simular_caida()
             fitness = mejor_individuo.CalcularAdaptacion()
             print(f"\n--- Generación {generacion + 1} ---")
             print(f"  Mejor individuo: Fuerza de Paracaídas = {mejor_individuo.fuerza_paracaidas:.2f} N")
@@ -112,7 +117,7 @@ if __name__ == "__main__":
     # Mostrar el mejor individuo
     print("\n--- Simulación finalizada ---")
     mejor_individuo_final = Get_mejor_individuo(poblacion)
-    _, velocidad_final_final,tiempo_final = mejor_individuo_final.simular_caida()
+    _, velocidad_final_final,tiempo_final, _ = mejor_individuo_final.simular_caida()
 
     print(f"\nEl mejor individuo encontrado después de {NUM_GENERACIONES} generaciones es:")
     print(f"  Fuerza de Paracaídas: {mejor_individuo_final.fuerza_paracaidas:.2f} N")
