@@ -7,7 +7,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import Algoritmo_genetico as ag
 
 class SimuladorParacaidista:
-    """Clase principal de la interfaz de usuario para el simulador."""
 
     def __init__(self, root):
         self.root = root
@@ -15,9 +14,9 @@ class SimuladorParacaidista:
         self.root.geometry("1400x900")
         self.root.configure(bg="#F0F0F0")
         default_font = tkFont.nametofont("TkDefaultFont")
-        default_font.configure(family="Poppins", size=10)
-        self.root.option_add("*Font", "Poppins 11")
-
+        default_font.configure(family="Poppins", size=12)
+        self.root.option_add("*Font", "Poppins 12")
+        
         self.poblacion = []
         self.generacion = 0
         self.historico_fitness = []
@@ -105,35 +104,33 @@ class SimuladorParacaidista:
         # Recuadro verde para el estado de la simulación
         self.panel_estado = ttk.LabelFrame(panel, text="Estado")
         self.panel_estado.pack(fill=tk.X, pady=10, padx=10)
-        self.label_estado_simulacion = ttk.Label(self.panel_estado, text="Listo para simular", font=("Arial", 12, "bold"))
+        self.label_estado_simulacion = ttk.Label(self.panel_estado, text="Listo para simular", font=("Poppins", 12, "bold"))
         self.label_estado_simulacion.pack(pady=10)
 
     def crear_etiquetas_variables_actuales(self, panel):
-        self.label_generacion = ttk.Label(panel, text="Generación: --", font=("Arial", 12))
+        self.label_generacion = ttk.Label(panel, text="Generación: --", font=("Poppins", 12))
         self.label_generacion.pack(pady=5, padx=10, anchor="w")
-        self.label_fuerza = ttk.Label(panel, text="Fuerza de Paracaídas: --", font=("Arial", 12))
+        self.label_fuerza = ttk.Label(panel, text="Fuerza de Paracaídas: --", font=("Poppins", 12))
         self.label_fuerza.pack(pady=5, padx=10, anchor="w")
-        self.label_velocidad = ttk.Label(panel, text="Velocidad Final: --", font=("Arial", 12))
+        self.label_velocidad = ttk.Label(panel, text="Velocidad Final: --", font=("Poppins", 12))
         self.label_velocidad.pack(pady=5, padx=10, anchor="w")
-        self.label_tiempo = ttk.Label(panel, text="Tiempo: --", font=("Arial", 12))
+        self.label_tiempo = ttk.Label(panel, text="Tiempo: --", font=("Poppins", 12))
         self.label_tiempo.pack(pady=5, padx=10, anchor="w")
-        self.label_fitness = ttk.Label(panel, text="Fitness: --", font=("Arial", 12))
+        self.label_fitness = ttk.Label(panel, text="Fitness: --", font=("Poppins", 12))
         self.label_fitness.pack(pady=5, padx=10, anchor="w")
-        self.label_resultado_actual = ttk.Label(panel, text="Resultado: --", font=("Arial", 12, "bold"))
+        self.label_resultado_actual = ttk.Label(panel, text="Resultado: --", font=("Poppins", 12, "bold"))
         self.label_resultado_actual.pack(pady=5, padx=10, anchor="w")
         
     def crear_etiquetas_variables_finales(self, panel):
-        self.label_titulo_final = ttk.Label(panel, text="Mejor Individuo Final", font=("Arial", 12, "bold"))
-        self.label_titulo_final.pack(pady=5, padx=10, anchor="w")
-        self.label_fuerza_final = ttk.Label(panel, text="Fuerza de Paracaídas: --", font=("Arial", 12))
+        self.label_fuerza_final = ttk.Label(panel, text="Fuerza de Paracaídas: --", font=("Poppins", 12))
         self.label_fuerza_final.pack(pady=5, padx=10, anchor="w")
-        self.label_velocidad_final = ttk.Label(panel, text="Velocidad Final: --", font=("Arial", 12))
+        self.label_velocidad_final = ttk.Label(panel, text="Velocidad Final: --", font=("Poppins", 12))
         self.label_velocidad_final.pack(pady=5, padx=10, anchor="w")
-        self.label_tiempo_final = ttk.Label(panel, text="Tiempo: --", font=("Arial", 12))
+        self.label_tiempo_final = ttk.Label(panel, text="Tiempo: --", font=("Poppins", 12))
         self.label_tiempo_final.pack(pady=5, padx=10, anchor="w")
-        self.label_fitness_final = ttk.Label(panel, text="Fitness: --", font=("Arial", 12))
+        self.label_fitness_final = ttk.Label(panel, text="Fitness: --", font=("Poppins", 12))
         self.label_fitness_final.pack(pady=5, padx=10, anchor="w")
-        self.label_resultado_final = ttk.Label(panel, text="Resultado: --", font=("Arial", 12, "bold"))
+        self.label_resultado_final = ttk.Label(panel, text="Resultado: --", font=("Poppins", 12, "bold"))
         self.label_resultado_final.pack(pady=5, padx=10, anchor="w")
 
     def crear_multiples_graficos(self, panel):
@@ -186,12 +183,12 @@ class SimuladorParacaidista:
 
             if individuo.exito:
                 self.mostrar_imagen("Celebracion.png", x_final, y_final)
-                self.label_resultado_actual.config(text="Resultado: Éxito", foreground="green")
-                self.label_estado_simulacion.config(text="¡Aterrizaje Exitoso!", foreground="green")
+                self.label_resultado_actual.config(text="Resultado: ¡Aterrizaje Exitoso 👌", foreground="green")
+                self.label_estado_simulacion.config(text="¡Aterrizaje Exitoso 👌!", foreground="green")
             elif individuo.choque:
                 self.mostrar_imagen("Choque.png", x_final, y_final)
-                self.label_resultado_actual.config(text="Resultado: Choque", foreground="red")
-                self.label_estado_simulacion.config(text="¡Choque!", foreground="red")
+                self.label_resultado_actual.config(text="Resultado: Choque 💥", foreground="red")
+                self.label_estado_simulacion.config(text="¡Choque 💥!", foreground="red")
             
             # Continuar con la siguiente generación
             self.root.after(100, self.correr_simulacion)
@@ -291,9 +288,9 @@ class SimuladorParacaidista:
         self.label_fitness_final.config(text=f"Fitness: {mejor_individuo_final.CalcularAdaptacion():.2f}")
         
         if mejor_individuo_final.exito:
-            self.label_resultado_final.config(text="Resultado: Éxito", foreground="green")
+            self.label_resultado_final.config(text="¡Aterrizaje Exitoso 👌!", foreground="green")
         elif mejor_individuo_final.choque:
-            self.label_resultado_final.config(text="Resultado: Choque", foreground="red")
+            self.label_resultado_final.config(text="Resultado: Choque 💥", foreground="red")
         
     def reiniciar_simulacion(self):
         self.poblacion = []
