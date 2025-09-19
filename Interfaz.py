@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import tkinter.font as tkFont
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -13,6 +14,9 @@ class SimuladorParacaidista:
         self.root.title("Clase de IA - Caída de Paracaidista")
         self.root.geometry("1400x900")
         self.root.configure(bg="#F0F0F0")
+        default_font = tkFont.nametofont("TkDefaultFont")
+        default_font.configure(family="Poppins", size=10)
+        self.root.option_add("*Font", "Poppins 11")
 
         self.poblacion = []
         self.generacion = 0
@@ -26,9 +30,7 @@ class SimuladorParacaidista:
 
         self.crear_widgets()
 
-    def crear_widgets(self):
-        """Configura todos los elementos de la interfaz, incluyendo paneles, inputs y gráficos."""
-        
+    def crear_widgets(self):        
         # Panel superior (controles y simulación)
         self.panel_superior = ttk.Frame(self.root, padding="10")
         self.panel_superior.pack(fill=tk.BOTH, expand=True)
