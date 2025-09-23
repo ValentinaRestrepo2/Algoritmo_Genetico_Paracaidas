@@ -10,7 +10,7 @@ class SimuladorParacaidista:
 
     def __init__(self, root):
         self.root = root
-        self.root.title("Clase de IA - Caída de Paracaidista")
+        self.root.title("Clase de IA - Caída del Paracaidista")
         self.root.geometry("1400x900")
         self.root.configure(bg="#F0F0F0")
         default_font = tkFont.nametofont("TkDefaultFont")
@@ -60,7 +60,7 @@ class SimuladorParacaidista:
         self.crear_etiquetas_variables_actuales(self.panel_vars_actuales)
         
         # Sub-panel de resultados finales
-        self.panel_resultados_finales = ttk.LabelFrame(self.panel_derecha, text="Resultados Finales")
+        self.panel_resultados_finales = ttk.LabelFrame(self.panel_derecha, text="Mejor individuo")
         self.panel_resultados_finales.pack(fill=tk.X, pady=5)
         self.crear_etiquetas_variables_finales(self.panel_resultados_finales)
 
